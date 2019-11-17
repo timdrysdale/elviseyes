@@ -2,6 +2,7 @@ var canvas = document.getElementById('video-canvas');
 
 var urlParams = new URLSearchParams(window.location.search);
 var repeats = 1
+var duration = 200
 
 stream = urlParams.get('stream');
 
@@ -67,9 +68,11 @@ durationSlider.oninput = function() {
 }
 
 durationSlider.onchange = function() {
-	console.log("duration", this.value)
+    console.log("duration", this.value)
+    duration = this.value
+    durationS = this.value / 1000.0
 	dataSocket.send(JSON.stringify({
-		duration: this.value
+	    duration: durationS
 	}));
 }
 
@@ -92,8 +95,9 @@ dataSocket.onopen = function (event) {
 	console.log("dataSocket open");
 	dataOpen = true; 
 
+        durationS = durationSlider.value / 1000.0
 	dataSocket.send(JSON.stringify({
-	    duration: durationSlider.value
+	    duration: durationS
 	}));
 };
 
@@ -116,15 +120,29 @@ dataSocket.onmessage = function (event) {
 //<button id="twinkle" class="button">Twinkle</button>
 
 document.getElementById("wink").onclick = function(){
-         
-	dataSocket.send(JSON.stringify({which: ["left"]	}));
     for (i = 0; i < repeats; i++) {
-	console.log("winking again", repeats - i)
-	dataSocket.send(JSON.stringify({which: []}));
-	dataSocket.send(JSON.stringify({which: ["left"]}));
+	console.log("delayMs",duration * i)
+        sleep(duration * i * 2).then(() => {
+	    console.log("winking")
+	    dataSocket.send(JSON.stringify({which: ["left"]}));
+        });
     }
 }
 
+
+
+
+
+//https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
+// sleep time expects milliseconds
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+// Usage!
+sleep(500).then(() => {
+    // Do something after the sleep!
+});
 
 
 
