@@ -39,7 +39,6 @@ async def listen(DIO):
                 
                 if 'duration' in command:
                     duration = float(command["duration"])
-                    print(duration)
                     ok = True
                     msg = "duration received"
                     if duration < 0.1:
