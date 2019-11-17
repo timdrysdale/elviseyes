@@ -27,6 +27,7 @@ lights = [left,right,bottom]
    
 #!/usr/bin/env python
 async def listen(DIO):
+    global bank, left, right, bottom, duration, lights
     uri = "ws://localhost:8888/ws/elvis"
     async with websockets.connect(uri) as websocket:
         while True:
