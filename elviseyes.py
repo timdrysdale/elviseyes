@@ -38,7 +38,7 @@ async def listen(DIO):
                 command = json.loads(message)
                 
                 if 'duration' in command:
-                    duration = float(command[duration])
+                    duration = command[duration]
                     print(duration)
                     ok = True
                     msg = "duration received"
