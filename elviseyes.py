@@ -49,7 +49,7 @@ async def listen(DIO):
                         msg = "error: duration greater than 1.0"
                         duration = 1.0
                     
-                if 'which' in commmand:
+                if 'which' in command:
                     
                     lights = []
                     if 'left' in command['which']:
