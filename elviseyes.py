@@ -53,18 +53,22 @@ async def listen(DIO):
                 if 'which' in command:
                     
                     lights = []
+                    ok = True
+                    eyes = False                
                     if 'left' in command['which']:
                         lights.append(left)
-                        ok = True
+                        eyes = True
                         msg += "(Left)"
                     if 'right' in command['which']:
                         lights.append(right)
-                        ok = True
+                        eyes = True
                         msg += "(Right)"
                     if 'bottom' in command['which']:
                         lights.append(bottom)
-                        ok = True
+                        eyes = True
                         msg += "(Bottom)"
+                    if not eyes:
+                        msg += "(NoEyes)"
                         
                 DIO.write(True, lights)
                 time.sleep(duration)
