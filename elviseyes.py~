@@ -9,10 +9,9 @@ Configuring an ELVIS session takes ~5-10 seconds so we must
 do this once, and keep it open while waiting for commands from the websocket.
 """
 
-import asyncio
-import json
-from nielvis import DigitalInputOutput, Bank, DIOChannel
 import time
+from nielvis import DigitalInputOutput, Bank, DIOChannel
+import asyncio
 import websockets
 
 # specify the bank
