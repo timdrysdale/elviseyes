@@ -131,18 +131,21 @@ header, footer, article, nav, aside {
 }
 
 
-#start       {background-color: #4CAF50FF;}
-#start:hover {background-color: #3e8e41} 
+#blink       {background-color: #4CAF50FF;}
+#blink:hover {background-color: #3e8e41} 
 
-#brake       {background-color: #e13131ff;}
-#brake:hover {background-color: #cc1e1eff;}
+#red       {background-color: #e13131ff;}
+#red:hover {background-color: #cc1e1eff;}
 
-#load        {background-color: #e17a31ff;}
-#load:hover  {background-color: #cc661eff;}
+#twinkle       {background-color: #aa446eff;}
+#twinkle:hover {background-color: #7f3352ff;}
 
-#free        {background-color: #e1b131ff;}
-#free:hover  {background-color: #cc9d1eff;}
+#spin        {background-color: #e17a31ff;}
+#spin:hover  {background-color: #cc661eff;}
+
+#all        {background-color: #e1b131ff;}
+#all:hover  {background-color: #cc9d1eff;}
 
 
-#cal         {background-color: #5b7fa5ff;}
-#cal:hover   {background-color: #46627fff;}
+#wink         {background-color: #5b7fa5ff;}
+#wink:hover   {background-color: #46627fff;}

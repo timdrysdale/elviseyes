@@ -103,7 +103,7 @@ dataSocket.onopen = function (event) {
 
 dataSocket.onmessage = function (event) {
 	try {
-	    // put code to process incoming messages here
+	    // put any code to process incoming messages here
 	    console.log(event.data)
 	} catch (e) {
 		if (debug){
@@ -112,16 +112,8 @@ dataSocket.onmessage = function (event) {
 	}
 }
 
-//<article>
-//<button id="wink" class="button">Wink</button>
-//<button id="blink" class="button">Blink</button>
-//<button id="all" class="button">All</button>
-//<button id="spin" class="button">Spin</button>
-//<button id="twinkle" class="button">Twinkle</button>
-
 document.getElementById("wink").onclick = function(){
     for (i = 0; i < repeats; i++) {
-	console.log("delayMs",duration * i)
         sleep(duration * i * 2).then(() => {
 	    console.log("winking")
 	    dataSocket.send(JSON.stringify({which: ["left"]}));
@@ -129,9 +121,59 @@ document.getElementById("wink").onclick = function(){
     }
 }
 
+document.getElementById("blink").onclick = function(){
+    for (i = 0; i < repeats; i++) {
+        sleep(duration * i * 2).then(() => {
+	    console.log("blinking")
+	    dataSocket.send(JSON.stringify({which: ["left","right"]}));
+        });
+    }
+}
 
+document.getElementById("all").onclick = function(){
+    for (i = 0; i < repeats; i++) {
+        sleep(duration * i * 2).then(() => {
+	    console.log("alling")
+	    dataSocket.send(JSON.stringify({which: ["left","right","bottom"]}));
+        });
+    }
+}
 
+document.getElementById("spin").onclick = function(){
+    for (i = 0; i < repeats; i++) {
+        sleep(duration * i * 3).then(() => {
+	    console.log("spin 1")
+	    dataSocket.send(JSON.stringify({which: ["left"]}));
+        });
+        sleep((duration * i * 3) + (duration * 1)).then(() => {
+	    console.log("spin 2")
+	    dataSocket.send(JSON.stringify({which: ["right"]}));
+        });
+        sleep((duration * i * 3) + (duration * 2)).then(() => {
+	    console.log("spin 3")
+	    dataSocket.send(JSON.stringify({which: ["bottom"]}));
+        });
+	
+    }
+}
+document.getElementById("twinkle").onclick = function(){
+    for (i = 0; i < repeats; i++) {
+        sleep(duration * i * 2).then(() => {
+	    console.log("twinkle top")
+	    dataSocket.send(JSON.stringify({which: ["left","right"]}));
+        });
+        sleep((duration * i * 2) + (duration * 1)).then(() => {
+	    console.log("twinkle bottom")
+	    dataSocket.send(JSON.stringify({which: ["bottom"]}));
+        });
+    }
+}
 
+document.addEventListener("DOMContentLoaded", function(event) {
+    // pick up the starting values set in the html for the sliders
+    duration = durationSlider.value
+    repeats = repeatSlider.value
+});
 
 //https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
 // sleep time expects milliseconds
@@ -139,10 +181,6 @@ function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-// Usage!
-sleep(500).then(() => {
-    // Do something after the sleep!
-});
 
 
 
